@@ -1,24 +1,42 @@
 <template>
-  <div>
-    <v-pagination
-    @change="imageUpdate()"
-    v-model="currentPage"
-    :page-count="5000"
-    ></v-pagination>
-    <img
-    :src="url"
-    />
-    <br/>
-    <a href="#"
-    :class="likeStatusClass"
-    role="button"
-    @click="likeCreate()"
-    >Like</a>
-    <a href="#"
-    :class="unlikeStatusClass"
-    role="button"
-    @click="likeDelete()"
-    >Unlike</a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+          <v-pagination
+          @change="imageUpdate()"
+          v-model="currentPage"
+          :page-count="5000"
+          :classes="bootstrapPaginationClasses"
+          ></v-pagination>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <a href="#"
+        id="likeButton"
+        :class="likeStatusClass"
+        role="button"
+        @click="likeCreate()"
+        >Like</a>
+      </div>
+      <div class="col-6">
+        <a href="#"
+        id="unlikeButton"
+        :class="unlikeStatusClass"
+        role="button"
+        @click="likeDelete()"
+        >Unlike</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <img
+        :src="url"
+        class="imageDisp"
+        />
+      </div>
+    </div>
+
   </div>
 </template>
 <script>
@@ -30,10 +48,17 @@
     data: function() {
       return {
         currentPage: 1,
+        bootstrapPaginationClasses: {
+          ul: 'pagination justify-content-center',
+          li: 'page-item',
+          liActive: 'active',
+          liDisable: 'disabled',
+          button: 'page-link'
+        },
         url: '',
         likeStatus: false,
         likeStatusClass: 'btn btn-success btn-lg',
-        unlikeStatusClass: 'btn btn-danger btn-lg disabled'
+        unlikeStatusClass: 'btn btn-danger btn-lg disabled',
       }
     },
     created() {
@@ -97,3 +122,19 @@
     },
   }
 </script>
+<style scoped>
+#likeButton {
+  float:right;
+  width: 110px;
+  margin: 10px 10px 10px 10px;
+}
+#unlikeButton {
+  float:left;
+  width: 110px;
+  margin: 10px 10px 10px 10px;
+}
+.imageDisp {
+  height: 55vh;
+  with: auto;
+}
+</style>
