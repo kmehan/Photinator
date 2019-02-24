@@ -13,7 +13,7 @@
 <script>
   function Image(id) {
     return new Promise((resolve,reject) => {
-      window.axios.get('http://jsonplaceholder.typicode.com/photos'+id).then(({data}) => {
+      window.axios.get('http://jsonplaceholder.typicode.com/photos/'+id).then(({data}) => {
         if (data) {
           //console.log(data.url);
           resolve(data.url);

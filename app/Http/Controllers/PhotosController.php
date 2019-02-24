@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Photinator\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Photo;
+use Photinator\Photo;
 
 class PhotosController extends Controller
 {
@@ -41,10 +41,11 @@ class PhotosController extends Controller
     public function ranking() {
       //Returns ranking of registered users with their name and number of likes
       $photos = Photo::select('user_id')->selectRaw('count(user_id) as likes')->groupBy('user_id')->orderBy('likes','DESC')->get();
-      $ranking = [];
-      foreach ($photos as $p) {
-        $ranking[] = ['name' => $p->user->name,'likes' => $p->likes];
+      $ranking=[];
+      foreach($photos as $p) {
+       $ranking[]=['name'=>$p->user->name,'likes'=>$p->likes];
       }
+      return response(json_encode($ranking), Response::HTTP_OK);
     }
     private function getIDs($idPair) {
       //Sanitizes and processes JSON argument passed to API and returns as key-value pair of user and picture ID for functions

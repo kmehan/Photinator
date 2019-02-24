@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Photinator;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
     //Add One to Many Relation to Photo Model
     public function photos() {
-      return $this->hasMany('App\Photo');
+      return $this->hasMany('Photinator\Photo');
     }
 
     /**

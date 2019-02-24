@@ -8,6 +8,7 @@
     <img
     :src="url"
     />
+    <br/>
     <a href="#"
     :class="likeStatusClass"
     role="button"
@@ -17,7 +18,7 @@
     :class="unlikeStatusClass"
     role="button"
     @click="likeDelete()"
-    >Like</a>
+    >Unlike</a>
   </div>
 </template>
 <script>
@@ -48,10 +49,10 @@
         var array = {pid:this.currentPage,uid:this.userId};
         var params = JSON.stringify(array);
         //console.log(params);
-        windows.axios.get('http://jsonplaceholder.typicode.com/photos'+this.currentPage).then(({data}) => {
+        window.axios.get('http://jsonplaceholder.typicode.com/photos/'+this.currentPage).then(({data}) => {
           this.url = data.url;
         });
-        window.axios.get('api/photos'+params).then(({data}) => {
+        window.axios.get('api/photos/'+params).then(({data}) => {
           //console.log(data);
           if(data === 'found') {
             this.likeStatus = true;
@@ -70,7 +71,7 @@
         //console.log(this.userId);
         var array = {pid:this.currentPage,uid:this.userId};
         var params = JSON.stringify(array);
-        window.axios.put('api/photos'+params).then(({data}) => {
+        window.axios.put('api/photos/'+params).then(({data}) => {
           //console.log(data);
           if(data.picture_id == this.currentPage) {
             this.likeStatus = true;
@@ -87,7 +88,7 @@
         //Deletes the like by invoking destroy() API endpoint in PhotosController
         var array = {pid:this.currentPage,uid:this.userId};
         var params = JSON.stringify(array);
-        window.axios.delete('api/photos'+params);
+        window.axios.delete('api/photos/'+params);
         this.likeStatus = false;
         this.likeStatusClass = 'btn btn-success btn-lg';
         this.unlikeStatusClass = 'btn btn-danger btn-lg disabled';

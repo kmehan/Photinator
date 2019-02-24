@@ -29,7 +29,7 @@
     props: ['rank','name','likes'],
     methods: {
       getUsers() {
-        windows.axios.get('api/photos/ranking').then(({data}) => {
+        window.axios.get('api/photos/ranking').then(({data}) => {
           for(let i=0; i<data.length; i++) {
             //console.log(data[i]);
             this.users.push(new User(i,data[i]));
