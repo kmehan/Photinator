@@ -15,6 +15,9 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->increments('id');
+            //Store User ID and Picture ID as pair for unique like combination
+            $table->integer('user_id');
+            $table->integer('picture_id');
             $table->timestamps();
         });
     }
